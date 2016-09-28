@@ -1,0 +1,18 @@
+[Unit]
+Description=TeamCity Agent
+After=network.target
+
+[Service]
+User=teamcity
+Group=teamcity
+Type=forking
+Environment="TEAMCITY_HOME=/var/www/teamcity/data"
+PIDFile=/var/www/teamcity/data/buildAgent/logs/buildAgent.pid
+ExecStart=/var/www/teamcity/data/buildAgent/bin/agent.sh start
+ExecStop=/var/www/teamcity/data/buildAgent/bin/agent.sh stop
+TimeoutStartSec=900
+TimeoutStopSec=60
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

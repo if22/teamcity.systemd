@@ -1,0 +1,16 @@
+[Unit]
+Description=TeamCity Server
+After=network.target
+
+[Service]
+User=teamcity
+Group=teamcity
+Type=forking
+Environment="TEAMCITY_PID_FILE_PATH=/var/www/teamcity/temp/teamcity.pid"
+Environment="TEAMCITY_HOME=/var/www/teamcity/data"
+PIDFile=/var/www/teamcity/temp/teamcity.pid
+ExecStart=/var/www/teamcity/data/bin/teamcity-server.sh start
+ExecStop=/var/www/teamcity/data/bin/teamcity-server.sh stop
+
+[Install]
+WantedBy=multi-user.target
